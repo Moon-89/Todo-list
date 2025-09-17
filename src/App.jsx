@@ -44,10 +44,11 @@ let newTodos = todos.filter(item=>{
     setTodos([...todos,{ id: uuidv4(),todo, isCompleted: false}])
     setTodo("")
     saveToLS()
+    console.log("Saved!");
    }
-const handleChange = (e) =>{
-    setTodo(e.target.value)
-   }
+// const handleChange = (e) =>{
+//     setTodo(e.target.value)
+//    }
    const handleCheckbox = (e) =>{
     let id = e.target.name;
     let index = todos.findIndex(item=>{
@@ -66,7 +67,17 @@ const handleChange = (e) =>{
 <div className="addTodo my-5 flex flex-col gap-5">
   <h2 className='text-xl font-bold'>Add a Todo</h2>
   <div className="flex ">
-<input onChange={handleChange} value={todo} type="text" className="w-full rounded-lg px-5 py-1 " />
+{/* <input onChange={handleChange} value={todo} type="text" className="w-full rounded-lg px-5 py-1 " /> */}
+<input className="w-full rounded-lg px-5 py-1 " 
+    type="text"
+    value={todo}
+    onChange={(e) => setTodo(e.target.value)}
+    onKeyPress={(e) => {
+      if (e.key === "Enter") {
+        handleAdd();
+      }
+    }}
+  />
   <button onClick={handleAdd} disabled={todo.length<=0} className='mx-2 bg-violet-800 hover:bg-violet-950  p-4 py-2 font-bold text-sm text-white rounded-md cursor-pointer'>Save</button>
   </div>
 </div>
