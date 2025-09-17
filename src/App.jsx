@@ -67,7 +67,7 @@ const handleChange = (e) =>{
   <h2 className='text-xl font-bold'>Add a Todo</h2>
   <div className="flex ">
 <input onChange={handleChange} value={todo} type="text" className="w-full rounded-lg px-5 py-1 " />
-  <button onClick={handleAdd} disabled={todo.length>=1} className='mx-2 bg-violet-800 hover:bg-violet-950  p-4 py-2 font-bold text-sm text-white rounded-md cursor-pointer'>Save</button>
+  <button onClick={handleAdd} disabled={todo.length<=1} className='mx-2 bg-violet-800 hover:bg-violet-950  p-4 py-2 font-bold text-sm text-white rounded-md cursor-pointer'>Save</button>
   </div>
 </div>
 <input className="my-4 id-show" onChange={toggleFinished} type="checkbox" checked={showFinished} /> 
