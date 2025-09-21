@@ -1,13 +1,16 @@
-function TodoFilter({ showFinished, toggleFinished }) {
+function TodoFilter({ showCompleted, toggleCompleted }) {
   return (
     <div className="my-4">
       <input
-        className="id-show"
-        onChange={toggleFinished}
+        id="show-completed"
+        className="cursor-pointer"
+        onChange={toggleCompleted}
         type="checkbox"
-        checked={showFinished}
+        checked={showCompleted}
       />
-      <label className="mx-2" htmlFor="show">Show Finished</label>
+      <label className="mx-2 cursor-pointer" htmlFor="show-completed">
+        Show Completed
+      </label>
     </div>
   );
 }

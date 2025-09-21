@@ -1,22 +1,21 @@
-import TodoItem from './TodoItem';
+import TodoItem from "./TodoItem";
 
-
-function TodoList({ todos, showFinished, handleEdit, handleDelete, handleCheckbox }) {
-  if (todos.length === 0) return <div className="m-5">No todos to display</div>;
+function TodoList({ todos, showCompleted, handleEdit, handleDelete, handleCheckbox }) {
+  if (todos.length === 0) {
+    return <div className="m-5">No todos to display</div>;
+  }
 
   return (
     <div className="todos">
-      {todos.map((item) =>
-        (showFinished || !item.isCompleted) && (
-          <TodoItem
-            key={item.id}
-            item={item}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            handleCheckbox={handleCheckbox}
-          />
-        )
-      )}
+      {todos.map((item) => (
+        <TodoItem
+          key={item.id}
+          item={item}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+          handleCheckbox={handleCheckbox}
+        />
+      ))}
     </div>
   );
 }

@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import TodoInput from "./components/TodoInput";
 import TodoFilter from "./components/TodoFilter";
 import TodoList from "./components/TodoList";
-
 import { v4 as uuidv4 } from "uuid";
 import "./index.css";
 
@@ -11,23 +10,20 @@ function App() {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState([]);
   const [showCompleted, setShowCompleted] = useState(true);
-
-  // Load todos from localStorage on first render
   useEffect(() => {
-    const stored = localStorage.getItem("todos");
-    if (stored) {
-      setTodos(JSON.parse(stored));
+    let todoString = localStorage.getItem("todos")
+    if(todoString){
+ let todos = JSON.parse(localStorage.getItem("todos"))
+   setTodos(todos)
     }
-  }, []);
-
-  // Save todos to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  }, [])
+const saveToLS = (params) => {
+  localStorage.setItem("todos", JSON.stringify(todos))
+}
 
   const handleAdd = () => {
     if (todo.trim() === "") return;
-    setTodos([...todos, { id: uuidv4(), todo, isCompleted: false }]);
+    setTodos([...todos, { id: uuidv4(),todo, isCompleted: false}]);
     setTodo("");
   };
 
@@ -43,14 +39,19 @@ function App() {
     setTodos(todos.filter((t) => t.id !== id));
   };
 
-  const handleCheckbox = (e) => {
-    const id = e.target.name;
-    setTodos((prev) =>
-      prev.map((t) =>
-        t.id === id ? { ...t, isCompleted: !t.isCompleted } : t
-      )
-    );
-  };
+  
+
+const handleCheckbox = (e) =>{
+    let id = e.target.name;
+    let index = todos.findIndex(item=>{
+      return item.id === id;
+    })
+    let newTodos = [...todos];
+    newTodos[index].isCompleted = !newTodos[index].isCompleted;
+      setTodos(newTodos)
+     saveToLS()
+   }
+
 
   const toggleCompleted = () => {
     setShowCompleted(!showCompleted);
