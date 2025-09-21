@@ -7,15 +7,17 @@ function TodoList({ todos, showCompleted, handleEdit, handleDelete, handleCheckb
 
   return (
     <div className="todos">
-      {todos.map((item) => (
-        <TodoItem
-          key={item.id}
-          item={item}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          handleCheckbox={handleCheckbox}
-        />
-      ))}
+      {todos
+        .filter(item => showCompleted || !item.isCompleted)
+        .map(item => (
+          <TodoItem
+            key={item.id}
+            item={item}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            handleCheckbox={handleCheckbox}
+          />
+        ))}
     </div>
   );
 }
